@@ -1,0 +1,59 @@
+<div id="<%= dom_id product %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Name:</strong>
+    <%= product.name %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Description:</strong>
+    <%= product.description %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Price:</strong>
+    <%= product.price %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Stock:</strong>
+    <%= product.stock %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Category:</strong>
+    <%= product.category_id %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Color:</strong>
+    <%= product.color_id %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Size:</strong>
+    <%= product.size %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Images:</strong>
+    <% product.images.each do |image| %>
+      <div><%= link_to image.filename, image %></div>
+    <% end %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Created at:</strong>
+    <%= product.created_at %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Updated at:</strong>
+    <%= product.updated_at %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Deleted at:</strong>
+    <%= product.deleted_at %>
+  </p>
+
+</div>
