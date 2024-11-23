@@ -3,8 +3,10 @@ class ProductsController < ApplicationController
 
   # GET /products
   def index
-    @products = Product.all
+    @q = Product.ransack(params[:q])
+    @products = @q.result(distinct: true)
   end
+
 
   # GET /products/1
   def show

@@ -5,6 +5,15 @@ class Product < ApplicationRecord
   has_rich_text :description
   has_many_attached :images
 
+
+  def self.ransackable_attributes(auth_object = nil)
+    %w[name description]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    []
+  end
+
   validates :name, :description, :price, :stock, :category, :images, presence: true
   validates :price, numericality: { greater_than_or_equal_to: 0 }
   validates :stock, numericality: { greater_than_or_equal_to: 0 }

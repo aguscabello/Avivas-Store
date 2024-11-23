@@ -18,6 +18,9 @@ gem "stimulus-rails"
 gem "tailwindcss-rails"
 # Gema para borrado lógico
 gem "paranoia", "~> 3.0"
+# Gema para formulario de busqueda
+gem "ransack"
+
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
