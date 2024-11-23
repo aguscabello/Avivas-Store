@@ -20,6 +20,9 @@ gem "tailwindcss-rails"
 gem "paranoia", "~> 3.0"
 # Gema para formulario de busqueda
 gem "ransack"
+# Gema de autenticacion
+gem "devise"
+
 
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
