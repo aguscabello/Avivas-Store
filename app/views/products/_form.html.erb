@@ -31,15 +31,15 @@
     <%= form.number_field :stock, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
-  <div class="my-5">
-    <%= form.label :category_id %>
-    <%= form.text_field :category_id, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
+ <div class="my-5">
+  <%= form.label :category_id %>
+  <%= form.select :category_id, Category.all.collect { |c| [c.name, c.id] }, { prompt: 'Select a Category' }, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+</div>
 
-  <div class="my-5">
-    <%= form.label :color_id %>
-    <%= form.text_field :color_id, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
+<div class="my-5">
+  <%= form.label :color_id %>
+  <%= form.select :color_id, Color.all.collect { |c| [c.name, c.id] }, { prompt: 'Select a Color' }, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+</div>
 
   <div class="my-5">
     <%= form.label :size %>

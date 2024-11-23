@@ -1,0 +1,33 @@
+<!-- views/shared/_card.html.erb -->
+<div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 overflow-hidden mx-auto">
+  <a href="<%= product_path(product) %>">
+  <% if product.images.attached? %>
+  <img class="w-full h-56 object-cover rounded-t-lg" 
+       src="<%= url_for(product.images.first) %>" 
+       alt="<%= product.name %>" />
+<% else %>
+  <img class="w-full h-56 object-cover rounded-t-lg" 
+       src="default-image-url" 
+       alt="default image" />
+<% end %>
+
+  </a>
+  <div class="p-6">
+    <a href="<%= product_path(product) %>">
+      <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
+        <%= product.name %>
+      </h5>
+    </a>
+    <div class="flex items-center justify-between mt-2 mb-4">
+      <span class="text-gray-500 text-sm">Stock: </span>
+      <span class="text-gray-600 text-sm"><%= product.stock %></span>
+    </div>
+    <div class="flex items-center justify-between mt-2 mb-4">
+      <span class="text-gray-500 text-sm">Price: </span>
+      <span class="text-lg font-bold text-gray-900 dark:text-white"><%= number_to_currency(product.price) %></span>
+    </div>
+    <div class="flex justify-center">
+      <%= link_to 'View more', product, class: "inline-block text-black bg-red-500 hover:bg-indigo-700 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-indigo-700 dark:hover:bg-indigo-800 dark:focus:ring-indigo-900" %>
+    </div>
+  </div>
+</div>

@@ -21,12 +21,12 @@
 
   <p class="my-5">
     <strong class="block font-medium mb-1">Category:</strong>
-    <%= product.category_id %>
+    <%= product.category.name %>
   </p>
 
   <p class="my-5">
     <strong class="block font-medium mb-1">Color:</strong>
-    <%= product.color_id %>
+    <%= product.color.name %>
   </p>
 
   <p class="my-5">
@@ -41,19 +41,6 @@
     <% end %>
   </p>
 
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Created at:</strong>
-    <%= product.created_at %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Updated at:</strong>
-    <%= product.updated_at %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Deleted at:</strong>
-    <%= product.deleted_at %>
-  </p>
+  
 
 </div>
