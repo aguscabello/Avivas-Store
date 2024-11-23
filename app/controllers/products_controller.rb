@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
   # GET /products
   def index
     @q = Product.ransack(params[:q])
-    @products = @q.result(distinct: true)
+    @products = @q.result.includes(:rich_text_description)
   end
 
 

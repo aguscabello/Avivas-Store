@@ -21,12 +21,12 @@
 
   <p class="my-5">
     <strong class="block font-medium mb-1">Category:</strong>
-    <%= product.category.name %>
+    <%= product.category&.name %>
   </p>
 
   <p class="my-5">
     <strong class="block font-medium mb-1">Color:</strong>
-    <%= product.color.name %>
+    <%= product.color&.name || "Sin color" %>
   </p>
 
   <p class="my-5">
