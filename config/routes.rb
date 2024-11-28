@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
+  get "users", to:"users#index"
+  get "users/show"
+  get "users/edit"
+  get "users/update"
+  get "users/destroy"
   devise_for :users
   resources :products
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-  get "login", to: "auth#login"
-  post "login", to: "auth#login"
-
+ 
 
 
 

@@ -1,0 +1,33 @@
+<!-- app/views/users/index.html.erb -->
+
+
+<% if @users.any? %>
+  <div class="overflow-x-auto bg-white shadow-md rounded-lg">
+    <table class="min-w-full table-auto border-collapse">
+      <thead class="bg-gray-100">
+        <tr>
+          <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Username</th>
+          <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Email</th>
+          <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Phone</th>
+          <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Role</th>
+          <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Joining Date</th>
+          <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr class="border-t hover:bg-gray-50">
+            <td class="px-4 py-2 text-sm text-gray-900"><%= user.username %></td>
+            <td class="px-4 py-2 text-sm text-gray-900"><%= user.email %></td>
+            <td class="px-4 py-2 text-sm text-gray-900"><%= user.phone %></td>
+            <td class="px-4 py-2 text-sm text-gray-900"><%= user.role.capitalize %></td>
+            <td class="px-4 py-2 text-sm text-gray-900"><%= user.joining_date.strftime("%B %d, %Y") %></td>
+           
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <p class="text-gray-500 mt-4">No users found.</p>
+<% end %>
