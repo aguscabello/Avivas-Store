@@ -1,0 +1,31 @@
+<div class="overflow-x-auto">
+  <table class="min-w-full table-auto border-collapse text-lg">
+    <thead class="bg-gray-200">
+      <tr>
+        <th class="px-6 py-3 text-left font-semibold">Username</th>
+        <th class="px-6 py-3 text-left font-semibold">Email</th>
+        <th class="px-6 py-3 text-left font-semibold">Phone</th>
+        <th class="px-6 py-3 text-left font-semibold">Role</th>
+        <th class="px-6 py-3 text-left font-semibold">Joining Date</th>
+        <th class="px-6 py-3 text-left font-semibold">Active</th>
+        <th class="px-6 py-3 text-left font-semibold">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% users.each do |user| %>
+        <tr class="border-b">
+          <td class="px-6 py-4"><%= user.username %></td>
+          <td class="px-6 py-4"><%= user.email %></td>
+          <td class="px-6 py-4"><%= user.phone %></td>
+          <td class="px-6 py-4"><%= user.role.capitalize %></td>
+          <td class="px-6 py-4"><%= user.joining_date.strftime('%B %d, %Y') %></td>
+          <td class="px-6 py-4"><%= user.active ? 'Yes' : 'No' %></td>
+          <td class="px-6 py-4">
+            <%= link_to "Edit", edit_admin_user_path(user), class: "text-blue-600 font-medium py-2 px-4 bg-blue-100 rounded-lg hover:bg-blue-200 transition duration-200" %> |
+            <%= link_to "Show", admin_user_path(user), class: "text-green-600 font-medium py-2 px-4 bg-green-100 rounded-lg hover:bg-green-200 transition duration-200" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

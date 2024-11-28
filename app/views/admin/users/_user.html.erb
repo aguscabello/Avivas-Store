@@ -1,0 +1,34 @@
+<div id="<%= dom_id(user) %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Username:</strong>
+    <%= user.username %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Email:</strong>
+    <%= user.email %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Phone:</strong>
+    <%= user.phone %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Role:</strong>
+    <%= user.role.capitalize %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Joining Date:</strong>
+    <%= user.joining_date.strftime('%B %d, %Y') %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Active:</strong>
+    <%= user.active ? 'Yes' : 'No' %>
+  </p>
+
+ 
+
+</div>

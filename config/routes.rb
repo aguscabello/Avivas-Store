@@ -1,13 +1,10 @@
 Rails.application.routes.draw do
-  get "users", to:"users#index"
-  get "users/show"
-  get "users/edit"
-  get "users/update"
-  get "users/destroy"
+  namespace :admin do
+    resources :users
+  end
   devise_for :users
   resources :products
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
- 
 
 
 
