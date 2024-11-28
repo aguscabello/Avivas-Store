@@ -7,6 +7,13 @@ class DeviseCreateUsers < ActiveRecord::Migration[8.0]
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
 
+      # Modelo pedido
+      t.string :username,           null: false, default: ""
+      t.string :phone,              null: false
+      t.string :role,               null: false, default: "employee" # rol por defecto
+      t.date   :joining_date,       null: false
+      t.boolean :active,            null: false, default: true
+
       ## Recoverable
       t.string   :reset_password_token
       t.datetime :reset_password_sent_at
@@ -36,6 +43,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[8.0]
       t.timestamps null: false
     end
 
+    add_index :users, :username,             unique: true
     add_index :users, :email,                unique: true
     add_index :users, :reset_password_token, unique: true
     # add_index :users, :confirmation_token,   unique: true
