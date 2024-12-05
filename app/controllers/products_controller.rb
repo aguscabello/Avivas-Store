@@ -1,11 +1,16 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, except: [ :index, :show ]
 
 
   # GET /products
   def index
     @q = Product.ransack(params[:q])
-    @products = @q.result.includes(:rich_text_description)
+    if user_signed_in?
+      @products = @q.result.with_deleted.includes(:rich_text_description)
+    else
+      @products = @q.result.includes(:rich_text_description).where("stock > 0")
+    end
   end
 
 
@@ -44,6 +49,7 @@ class ProductsController < ApplicationController
 
   # DELETE /products/1
   def destroy
+    @product.update!(stock: 0)
     @product.destroy!
     redirect_to products_path, notice: "Product was successfully destroyed.", status: :see_other
   end
@@ -51,7 +57,7 @@ class ProductsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product
-      @product = Product.find(params.expect(:id))
+      @product = Product.with_deleted.find(params.expect(:id))
     end
 
     # Only allow a list of trusted parameters through.

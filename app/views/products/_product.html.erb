@@ -35,12 +35,36 @@
   </p>
 
   <p class="my-5">
-    <strong class="block font-medium mb-1">Images:</strong>
-    <% product.images.each do |image| %>
-      <div><%= link_to image.filename, image %></div>
-    <% end %>
+  <strong class="block font-medium mb-1">Images:</strong>
+  <% product.images.each do |image| %>
+    <div>
+      <%= image_tag image %> 
+    </div>
+  <% end %>
+</p>
+
+  <% if user_signed_in? %>
+
+
+    <p class="my-5">
+    <strong class="block font-medium mb-1">Creation date:</strong>
+    <%= @product.created_at.to_formatted_s(:long) %>
   </p>
 
-  
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Updated at:</strong>
+    <%= @product.updated_at.to_formatted_s(:long) %>
+  </p>
+
+  <% if @product.deleted_at %>
+    <p class="my-5">
+      <strong class="block font-medium mb-1">Deleted at:</strong>
+      <%= @product.deleted_at.to_formatted_s(:long) %>
+    </p>
+  <% end %>
+
+
+  <% end %>
+
 
 </div>
