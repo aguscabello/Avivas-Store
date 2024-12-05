@@ -3,7 +3,16 @@ Rails.application.routes.draw do
     resources :users
   end
   devise_for :users
-  resources :products
+
+  Rails.application.routes.draw do
+    resources :products do
+      member do
+        get :edit_stock   # Ruta para mostrar el formulario de edición de stock
+        patch :update_stock # Ruta para procesar la actualización del stock
+      end
+    end
+  end
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
 

@@ -4,7 +4,9 @@ class Product < ApplicationRecord
   belongs_to :color, optional: true
 
   has_rich_text :description
-  has_many_attached :images
+  has_many_attached :images, dependent: :nullify
+
+
 
 
   def self.ransackable_attributes(auth_object = nil)
