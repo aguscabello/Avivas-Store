@@ -56,6 +56,6 @@ class Admin::UsersController < ApplicationController
 
 
   def authorize_admin!
-    redirect_to root_path, alert: "You are not authorized to perform this action." unless current_user.admin?
+    redirect_to root_path, alert: "You are not authorized to perform this action." unless current_user.admin? || current_user.manager?
   end
 end

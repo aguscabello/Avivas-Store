@@ -22,6 +22,8 @@ gem "paranoia", "~> 3.0"
 gem "ransack"
 # Gema de autenticacion
 gem "devise"
+# Gema para mensajes
+gem "rails-ujs"
 
 
 

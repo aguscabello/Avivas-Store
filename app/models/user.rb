@@ -17,7 +17,7 @@ class User < ApplicationRecord
 
 
     def deactivate!
-      update(active: false, encrypted_password: Devise.friendly_token) # cambia contraseña a valor aleatorio
+      update(active: false)
     end
 
     def admin?
