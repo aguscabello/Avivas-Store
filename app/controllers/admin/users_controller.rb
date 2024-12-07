@@ -44,6 +44,20 @@ class Admin::UsersController < ApplicationController
     redirect_to admin_users_path, notice: "User was successfully deactivated."
   end
 
+
+  def reactivate
+    @user = User.find_by(id: params[:id])
+
+    if @user.nil?
+      redirect_to admin_users_path, alert: "User not found."
+      return
+    end
+
+    @user.reactivate!
+    redirect_to admin_users_path, notice: "User was successfully reactivated."
+  end
+
+
   private
 
   def set_user

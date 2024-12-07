@@ -5,7 +5,8 @@ class Product < ApplicationRecord
 
   has_rich_text :description
   has_many_attached :images, dependent: :nullify
-
+  has_many :sold_products
+  has_many :sales, through: :sold_products
 
 
 

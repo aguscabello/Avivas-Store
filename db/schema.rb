@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_23_200646) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_07_000747) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -75,6 +75,28 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_23_200646) do
     t.index ["color_id"], name: "index_products_on_color_id"
   end
 
+  create_table "sales", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.datetime "date"
+    t.decimal "total"
+    t.boolean "canceled"
+    t.string "client_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_sales_on_user_id"
+  end
+
+  create_table "sold_products", force: :cascade do |t|
+    t.integer "sale_id", null: false
+    t.integer "product_id", null: false
+    t.integer "quantity"
+    t.decimal "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_sold_products_on_product_id"
+    t.index ["sale_id"], name: "index_sold_products_on_sale_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -88,6 +110,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_23_200646) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "previous_password"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
@@ -97,4 +120,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_23_200646) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "colors"
+  add_foreign_key "sales", "users"
+  add_foreign_key "sold_products", "products"
+  add_foreign_key "sold_products", "sales"
 end

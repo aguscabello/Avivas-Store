@@ -1,15 +1,21 @@
 Rails.application.routes.draw do
+  resources :sales
   namespace :admin do
-    resources :users
+    resources :users do
+      member do
+        put :reactivate
+      end
+    end
   end
 
   devise_for :users
 
   Rails.application.routes.draw do
+  resources :sales
     resources :products do
       member do
         get :edit_stock   # Ruta para mostrar el formulario de edición de stock
-        patch :update_stock # Ruta para procesar la actualización del stock
+        patch :update_stock
       end
     end
   end
