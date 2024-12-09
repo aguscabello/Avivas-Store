@@ -9,5 +9,6 @@ Pasos para correr el proyecto:
 - bundle install
 - rails db:create
 - rails db:migrate
+- rails db:seed
 - rails assets:precompile
 - rails server
