@@ -1,10 +1,28 @@
 class Admin::UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :authorize_admin!, only: [ :index, :show, :edit, :update, :destroy ]
-  before_action :set_user, only: [ :show, :edit, :update, :destroy ]
+  before_action :set_user, only: [ :show, :edit, :update, :destroy, :edit_profile ]
 
   def index
     @users = User.all
+  end
+
+  def profile
+    @user = current_user
+  end
+
+  def edit_profile
+  end
+
+
+  def update_profile
+    @user = current_user
+
+    if @user.update(user_params)
+      redirect_to profile_admin_users_path(@user), notice: "Profile was successfully updated."
+    else
+      render :profile
+    end
   end
 
   def show

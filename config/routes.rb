@@ -4,6 +4,11 @@ Rails.application.routes.draw do
     resources :users do
       member do
         put :reactivate
+        put :update_profile
+        get :edit_profile
+      end
+      collection do
+        get :profile
       end
     end
   end
@@ -14,7 +19,7 @@ Rails.application.routes.draw do
   resources :sales
     resources :products do
       member do
-        get :edit_stock   # Ruta para mostrar el formulario de edición de stock
+        get :edit_stock
         patch :update_stock
       end
     end

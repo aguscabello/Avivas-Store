@@ -24,6 +24,7 @@
             <div class="flex space-x-2">
             <%= link_to "Edit", edit_admin_user_path(user), class: "text-blue-600 font-medium py-2 px-4 bg-blue-100 rounded-lg hover:bg-blue-200 transition duration-200" %>
             <%= link_to "Show", admin_user_path(user), class: "text-green-600 font-medium py-2 px-4 bg-green-100 rounded-lg hover:bg-green-200 transition duration-200" %>
+           <%if current_user.admin? %>
             <% if user.active %>
                 <%= button_to "Disable", admin_user_path(user), 
                     method: :delete, 
@@ -35,6 +36,7 @@
                     class: "text-green-600 font-medium py-2 px-4 bg-green-100 rounded-lg hover:bg-green-200 transition duration-200", 
                     data: { confirm: "Are you sure you want to enable this user?" } %>
               <% end %>
+            <%end%>
         </td>
         </tr>
       <% end %>
