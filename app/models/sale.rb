@@ -18,6 +18,16 @@ class Sale < ApplicationRecord
     end
   end
 
+  def cancel!
+    return if canceled?
+
+    ActiveRecord::Base.transaction do
+      update!(canceled: true)
+      restore_stock_if_canceled
+    end
+  end
+
+
   private
 
   def restore_stock_if_canceled

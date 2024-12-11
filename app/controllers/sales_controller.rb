@@ -67,8 +67,16 @@ class SalesController < ApplicationController
 
   # DELETE /sales/1
   def destroy
-    @sale.destroy!
+    @sale = Sale.find(params[:id])
+
+    if @sale.canceled?
+    redirect_to sales_path, alert: "Sale is already canceled.", status: :unprocessable_entity
+      return
+    end
+    @sale.cancel!
     redirect_to sales_path, notice: "Sale was successfully canceled.", status: :see_other
+  rescue ActiveRecord::RecordInvalid => e
+    redirect_to sales_path, alert: "Error canceling sale: #{e.message}", status: :unprocessable_entity
   end
 
   private
