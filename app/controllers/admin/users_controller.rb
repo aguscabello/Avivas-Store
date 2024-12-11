@@ -72,9 +72,15 @@ class Admin::UsersController < ApplicationController
       return
     end
 
-    @user.reactivate!
-    redirect_to admin_users_path, notice: "User was successfully reactivated."
+    new_password = params[:user][:password]
+
+    Rails.logger.debug "Reactivate user: #{@user.username}, New Password: #{new_password}"
+
+
+    @user.reactivate!(new_password)
+    redirect_to admin_users_path, notice: "User was successfully reactivated with a new password."
   end
+
 
 
   private

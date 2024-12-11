@@ -16,18 +16,19 @@ class User < ApplicationRecord
     scope :inactive, -> { where(active: false) }
 
 
+    def deactivate!
+      token = Devise.friendly_token
+      update!(password: token, password_confirmation: token, active: false)
+    end
 
-      def deactivate!
-        token = Devise.friendly_token # Genera un token para el usuario desactivado.
-        update!(previous_password: encrypted_password, password: token, password_confirmation: token, active: false)
-      end
+    def reactivate!(new_password)
+      update!(
+        password: new_password,
+        password_confirmation: new_password,
+        active: true
+      )
+    end
 
-      def reactivate!
-        update!(password: previous_password,
-                password_confirmation: previous_password,
-                previous_password: nil,
-                active: true)
-      end
 
     def admin?
       role == "admin"
