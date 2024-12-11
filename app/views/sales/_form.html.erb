@@ -12,44 +12,35 @@
 
   <div class="my-5">
     <%= form.label :user_id %>
-    <%= form.select :user_id, User.all.collect { |u| [u.username, u.id] }, { prompt: 'Select a Employee' }, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.select :user_id, User.all.collect { |u| [u.username, u.id] }, { prompt: 'Select an Employee' }, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="my-5">
     <%= form.label :client_name %>
-    <%= form.text_field :client_name, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>    
+    <%= form.text_field :client_name, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="my-5">
     <%= form.label :date %>
-    <%= form.datetime_field :date, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>       
+    <%= form.datetime_field :date, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <%= form.hidden_field :total, value: @sale.total %>
 
-  <div class="my-5">
-    <%= form.label :canceled %>
-    <%= form.checkbox :canceled, class: "block mt-2 h-5 w-5" %>
-  </div>
-
-<% unless sale.persisted? %>
-  <div class="my-5">
-    <h3>Products</h3>
-    <div id="sold-products-fields">
-      <%= form.fields_for :sold_products do |sold_product_fields| %>
-        <div class="product-item my-5">
-          <%= sold_product_fields.label :product_id, "Producto" %>
-          <%= sold_product_fields.collection_select :product_id, Product.all, :id, :name, prompt: "Seleccione un producto", class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
-
-          <div class="my-2">
-            <%= sold_product_fields.label :quantity, "Cantidad" %>
-            <%= sold_product_fields.number_field :quantity, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2", min: 1, value: sold_product_fields.object.quantity %>
-          </div>
+  <% unless sale.persisted? %>
+    <div class="my-5">
+      <h3>Products</h3>
+      <div id="product-quantities">
+       <% Product.all.each do |product| %>
+        <div class="my-5">
+          <%= label_tag "sale[product_quantities][#{product.id}]", product.name %>
+          <%= number_field_tag "sale[product_quantities][#{product.id}]", 0, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full", min: 0 %>
         </div>
       <% end %>
+
+      </div>
     </div>
-  </div>
-  <%end%>
+  <% end %>
 
   <div class="inline">
     <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>

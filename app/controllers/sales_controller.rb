@@ -31,16 +31,26 @@ class SalesController < ApplicationController
     ActiveRecord::Base.transaction do
       @sale.save!
 
-      @sale.sold_products.each do |sold_product|
+      product_quantities = params[:sale][:product_quantities] || {}
+      product_quantities.each do |product_id, quantity|
+        next if quantity.to_i <= 0
+
+        sold_product = SoldProduct.create!(
+          sale: @sale,
+          product_id: product_id,
+          quantity: quantity,
+          price: Product.find(product_id).price
+        )
+
         product = sold_product.product
         product.update!(stock: product.stock - sold_product.quantity)
       end
-
       @sale.calculate_total
       @sale.save!
     end
 
-    redirect_to @sale, notice: "Sale was successfully created."
+     redirect_to @sale, notice: "Sale was successfully created."
+
   rescue ActiveRecord::RecordInvalid => e
     flash[:alert] = "Error: #{e.message}"
     render :new, status: :unprocessable_entity
@@ -58,7 +68,7 @@ class SalesController < ApplicationController
   # DELETE /sales/1
   def destroy
     @sale.destroy!
-    redirect_to sales_path, notice: "Sale was successfully destroyed.", status: :see_other
+    redirect_to sales_path, notice: "Sale was successfully canceled.", status: :see_other
   end
 
   private

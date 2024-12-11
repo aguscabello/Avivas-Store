@@ -46,7 +46,8 @@ class Admin::UsersController < ApplicationController
   end
 
   def create
-    Rails.logger.debug user_params.inspect
+      authorize_admin!
+      Rails.logger.debug user_params.inspect
       @user = User.new(user_params)
 
       if @user.save
