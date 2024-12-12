@@ -9,7 +9,7 @@ class ProductsController < ApplicationController
     if user_signed_in?
       @products = @q.result.with_deleted.includes(:rich_text_description)
     else
-      @products = @q.result.includes(:rich_text_description)
+      @products = @q.result.with_deleted.includes(:rich_text_description).where('stock > 0')
     end
   end
 
