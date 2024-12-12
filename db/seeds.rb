@@ -76,7 +76,6 @@ shirt_product.save!
 
 puts "Se han creado los productos correctamente"
 
-
 admin = User.create!(
   username: "admin",
   email: "admin@example.com",
