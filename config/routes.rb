@@ -21,6 +21,8 @@ Rails.application.routes.draw do
       member do
         get :edit_stock
         patch :update_stock
+        delete 'delete_image/:image_id', to: 'products#delete_image', as: 'delete_image'
+
       end
     end
   end

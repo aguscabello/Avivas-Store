@@ -54,6 +54,21 @@ class ProductsController < ApplicationController
 
   # PATCH/PUT /products/1
   def update
+
+    if params[:product][:images_to_remove]
+      if @product.images.count == 1 && params[:product][:images_to_remove].length == 1
+        flash[:alert] = "The product must have at least one image."
+        render :edit, status: :unprocessable_entity and return
+      end
+    end
+
+    if params[:product][:images_to_remove]
+      params[:product][:images_to_remove].each do |image_id|
+        image = @product.images.find(image_id)
+        image.purge
+      end
+    end
+
     if product_params[:images]
       product_params[:images].each do |image|
         @product.images.attach(image)
@@ -65,6 +80,12 @@ class ProductsController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def delete_image
+    image = @product.images.find(params[:image_id])
+    image.purge
+    redirect_to edit_product_path(@product), notice: "La imagen fue eliminada exitosamente."
   end
 
 

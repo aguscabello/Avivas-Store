@@ -50,13 +50,17 @@
 
   <% if product.persisted? %>
     <div class="my-5">
-      <h2 class="font-medium text-lg mb-3">Imágenes Asociadas</h2>
+    <h2 class="font-medium text-lg mb-3">Imágenes Asociadas</h2>
 
-      <% product.images.each do |image| %>
-        <div class="flex items-center space-x-4 mb-3">
-          <%= image_tag url_for(image), class: "w-16 h-16 rounded shadow" %>
-        </div>
-      <% end %>
+    <% product.images.each do |image| %>
+      <div class="flex items-center space-x-4 mb-3">
+        <%= image_tag url_for(image), class: "w-16 h-16 rounded shadow" %>
+        
+        <!-- Checkbox para eliminar imagen -->
+        <%= check_box_tag "product[images_to_remove][]", image.id, false, class: "ml-2" %>
+        <%= label_tag "product_images_to_remove_#{image.id}", "Delete this image", class: "text-sm" %>
+      </div>
+    <% end %>
 
       <div class="my-5">
         <%= form.label :images, "Añadir nuevas imágenes" %>
