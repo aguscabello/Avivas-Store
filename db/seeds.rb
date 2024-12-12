@@ -76,7 +76,7 @@ shirt_product.save!
 
 puts "Se han creado los productos correctamente"
 
-User.create!(
+admin = User.create!(
   username: "admin",
   email: "admin@example.com",
   phone: "123456789",
@@ -86,7 +86,7 @@ User.create!(
   active: true
 )
 
-User.create!(
+manager = User.create!(
   username: "manager",
   email: "manager@example.com",
   phone: "987654321",
@@ -95,3 +95,43 @@ User.create!(
   joining_date: Date.today,
   active: true
 )
+
+employee = User.create!(
+  username: "employee",
+  email: "employee@example.com",
+  phone: "123456789",
+  password: "password",
+  role: "employee",
+  joining_date: Date.today,
+  active: true
+)
+
+sale1 = Sale.create!(user: admin,
+    client_name: 'Admin User',
+    date: Date.today)
+
+SoldProduct.create!(sale: sale1, product: shoes_product, quantity: 1, price: shoes_product.price)
+SoldProduct.create!(sale: sale1, product: shirt_product, quantity: 2, price: shirt_product.price)
+sale1.calculate_total
+sale1.save!
+
+sale2 = Sale.create!(user: manager,
+    client_name: 'Manager User',
+    date: Date.today)
+
+SoldProduct.create!(sale: sale2, product: hat_product, quantity: 2, price: hat_product.price)
+sale2.calculate_total
+sale2.save!
+
+
+sale3 = Sale.create!(user: employee,
+       client_name: 'Employee User',
+        date: Date.today)
+
+SoldProduct.create!(sale: sale3, product: hat_product, quantity: 1, price: hat_product.price)
+SoldProduct.create!(sale: sale3, product: shirt_product, quantity: 1, price: shirt_product.price)
+sale3.calculate_total
+sale3.save!
+
+puts "Se han creado las ventas correctamente"
+
