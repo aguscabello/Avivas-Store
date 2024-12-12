@@ -54,12 +54,19 @@ class ProductsController < ApplicationController
 
   # PATCH/PUT /products/1
   def update
-    if @product.update(product_params)
+    if product_params[:images]
+      product_params[:images].each do |image|
+        @product.images.attach(image)
+      end
+    end
+
+    if @product.update(product_params.except(:images))
       redirect_to @product, notice: "Product was successfully updated.", status: :see_other
     else
       render :edit, status: :unprocessable_entity
     end
   end
+
 
   # DELETE /products/1
   def destroy
