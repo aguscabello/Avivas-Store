@@ -30,10 +30,24 @@
     
     <%= render 'shared/navbar' %>
         
+<div class="flash-messages w-full">
+  <% flash.each do |type, message| %>
+    <% class_name = case type
+      when "notice" then "bg-green-50 text-green-500 py-2 px-3"
+      when "alert" then "bg-red-50 text-red-500 py-2 px-3"
+      else "bg-gray-50 text-gray-700 py-2 px-3"
+    end %>
+    <div class="py-3 px-3 mb-5 font-medium rounded-lg <%= class_name %>">
+      <%= message %>
+    </div>
+  <% end %>
+</div>
+
 
         
 
     <main class="container mx-auto mt-28 px-5 flex">
+
 
       <%= yield %>
     </main>

@@ -9,7 +9,7 @@ class ProductsController < ApplicationController
     if user_signed_in?
       @products = @q.result.with_deleted.includes(:rich_text_description)
     else
-      @products = @q.result.with_deleted.includes(:rich_text_description).where('stock > 0')
+      @products = @q.result.with_deleted.includes(:rich_text_description).where("stock > 0")
     end
   end
 
@@ -54,7 +54,6 @@ class ProductsController < ApplicationController
 
   # PATCH/PUT /products/1
   def update
-
     if params[:product][:images_to_remove]
       if @product.images.count == 1 && params[:product][:images_to_remove].length == 1
         flash[:alert] = "The product must have at least one image."
@@ -82,17 +81,12 @@ class ProductsController < ApplicationController
     end
   end
 
-  def delete_image
-    image = @product.images.find(params[:image_id])
-    image.purge
-    redirect_to edit_product_path(@product), notice: "La imagen fue eliminada exitosamente."
-  end
 
 
   # DELETE /products/1
   def destroy
     @product.update!(stock: 0)
-    @product.update!(deleted_at: Time.current)
+    @product.update!(deleted_at: Time.current) # cambiar por destroy!
     redirect_to products_path, notice: "Product was successfully destroyed.", status: :see_other
   end
 

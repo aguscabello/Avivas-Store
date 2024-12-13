@@ -53,8 +53,8 @@ class Admin::UsersController < ApplicationController
       if @user.save
         redirect_to admin_user_path(@user), notice: "User was successfully created."
       else
-        flash.now[:alert] = "Please, complete the form."
-        render :new
+        flash[:alert] = "Please, complete the form."
+        redirect_to new_admin_user_path
       end
   end
 
