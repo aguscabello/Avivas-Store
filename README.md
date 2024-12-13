@@ -9,8 +9,8 @@ Trabajo Final Integrador para TTPS (Opción Ruby)
 ## Características Principales
 
 ### 1. Sistema de Autenticación   
-- **Integración con Devise**: Permite el registro de usuarios, inicio de sesión y cierre de sesión.  
-- **Gestión de Roles**: Los roles de usuario (administrador, gerente, empleado) determinan los permisos de acceso en la plataforma. Se definen mediante un campo Role en el
+- **Integración con Devise**: Permite el inicio y cierre de sesión de los usuarios.  
+- **Gestión de Roles**: Los roles de usuario (admin, manager, employee) determinan los permisos de acceso en la plataforma. Se definen mediante un campo Role en el
   modelo User.
 - **Desactivar usuario**: Los usuarios pueden ser activados o desactivados mediante el campo `active` en el modelo User. Los usuarios desactivados no pueden iniciar sesión ya que se cambia su contraseña, solo el User con role "Admin" puede activarlo. Decidí que al activar el usuario el administrador debe elegir una nueva contraseña para él.
   
